@@ -42,16 +42,6 @@ public class LoanService {
   }
 
   public Loan borrow(String memberId, List<String> requestedIds, LocalDate borrowDate) {
-    return borrow(memberId, requestedIds, borrowDate, null);
-  }
-
-  /** dueDate = null thì hạn trả tự tính theo số ngày mượn của từng loại tài liệu. */
-  public Loan borrow(
-      String memberId, List<String> requestedIds, LocalDate borrowDate, LocalDate dueDate) {
-    if (borrowDate.isBefore(LocalDate.now()))
-      throw new IllegalArgumentException("Ngày mượn không được ở trong quá khứ.");
-    if (dueDate != null && !dueDate.isAfter(borrowDate))
-      throw new IllegalArgumentException("Ngày trả phải sau ngày mượn.");
     memberService.findById(memberId);
     List<String> itemIds = new ArrayList<>(new LinkedHashSet<>(requestedIds));
     if (itemIds.isEmpty())
@@ -70,10 +60,7 @@ public class LoanService {
     Loan loan = new Loan("L" + String.format("%04d", loans.size() + 1), memberId, borrowDate);
     for (LibraryItem item : items) {
       item.borrowOne();
-      loan.addDetail(
-          dueDate == null
-              ? new LoanDetail(item.getId(), borrowDate, item.getLoanDays())
-              : new LoanDetail(item.getId(), dueDate));
+      loan.addDetail(new LoanDetail(item.getId(), borrowDate, item.getLoanDays()));
     }
     loans.add(loan);
     return loan;

@@ -6,6 +6,10 @@ public abstract class Person implements java.io.Serializable {
   private final String id;
   private String fullName;
 
+  protected Person(String id) {
+    this(id, "Chưa cập nhật");
+  }
+
   protected Person(String id, String fullName) {
     this.id = Validator.text(id, "Mã người dùng").toUpperCase();
     setFullName(fullName);

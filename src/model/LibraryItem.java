@@ -14,6 +14,10 @@ public abstract class LibraryItem implements Borrowable, java.io.Serializable {
   private int availableQuantity;
   private int borrowCount;
 
+  protected LibraryItem(String id, String title, String author, int year) {
+    this(id, title, author, year, 1);
+  }
+
   protected LibraryItem(String id, String title, String author, int year, int quantity) {
     this.id = Validator.text(id, "Mã tài liệu").toUpperCase();
     setTitle(title);

@@ -1,6 +1,10 @@
 package model;
 
 public class Admin extends Person {
+  public Admin(String id) {
+    this(id, "Thủ thư");
+  }
+
   public Admin(String id, String fullName) {
     super(id, fullName);
   }

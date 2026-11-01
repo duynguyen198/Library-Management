@@ -1,6 +1,10 @@
 package model;
 
 public class Book extends LibraryItem {
+  public Book(String id, String title, String author, int year) {
+    this(id, title, author, year, 1);
+  }
+
   public Book(String id, String title, String author, int year, int quantity) {
     super(id, title, author, year, quantity);
   }

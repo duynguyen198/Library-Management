@@ -6,6 +6,10 @@ public class LoanDetail implements java.io.Serializable {
   private final String itemId;
   private final LocalDate dueDate;
 
+  public LoanDetail(String itemId, LocalDate borrowDate, int loanDays) {
+    this(itemId, borrowDate.plusDays(loanDays));
+  }
+
   public LoanDetail(String itemId, LocalDate dueDate) {
     this.itemId = itemId;
     this.dueDate = dueDate;

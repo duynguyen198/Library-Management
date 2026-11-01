@@ -13,6 +13,10 @@ public class Loan implements java.io.Serializable {
   private LocalDate returnDate;
   private long fine;
 
+  public Loan(String id, String memberId) {
+    this(id, memberId, LocalDate.now());
+  }
+
   public Loan(String id, String memberId, LocalDate borrowDate) {
     this.id = id;
     this.memberId = memberId;
